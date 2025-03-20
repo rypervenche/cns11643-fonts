@@ -19,7 +19,11 @@ if [[ "$current_version" == "$new_version" ]]; then
 else
   dos2unix $temp_release_file
   mv $temp_release_file release.txt
-  wget -qO Fonts_Kai.zip https://www.cns11643.gov.tw/opendata/Fonts_Kai.zip
-  wget -qO Fonts_Sung.zip https://www.cns11643.gov.tw/opendata/Fonts_Sung.zip
+  wget -O Fonts_Kai.zip https://www.cns11643.gov.tw/opendata/Fonts_Kai.zip
+  wget -O Fonts_Sung.zip https://www.cns11643.gov.tw/opendata/Fonts_Sung.zip
+  for file in *zip; do
+    unzip $file '*.ttf'
+  done
+  rm *zip
   echo -e "${YELLOW}${BOLD}UPDATED: $new_version${NC}"
 fi
