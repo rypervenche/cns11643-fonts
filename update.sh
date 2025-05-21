@@ -15,7 +15,7 @@ new_version=$(grep -oPm1 '(?<=版本：).*' release.txt)
 echo
 if [[ "$current_version" == "$new_version" ]]; then
   rm $temp_release_file
-  echo -e "${GREEN}${BOLD}No change: $new_version${NC}"
+  echo -e "${GREEN}${BOLD}No change: 0-unstable-${new_version:0:4}-${new_version:4:2}-${new_version:6:2}${NC}"
 else
   dos2unix $temp_release_file
   mv $temp_release_file release.txt
@@ -25,5 +25,5 @@ else
     unzip $file '*.ttf'
   done
   rm *zip
-  echo -e "${YELLOW}${BOLD}UPDATED: $new_version${NC}"
+  echo -e "${YELLOW}${BOLD}UPDATED: 0-unstable-${new_version:0:4}-${new_version:4:2}-${new_version:6:2}${NC}"
 fi
