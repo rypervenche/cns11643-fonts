@@ -10,7 +10,7 @@ temp_release_file="release_temp.txt"
 current_version=$(grep -oPm1 '(?<=版本：).*' release.txt)
 
 wget -qO $temp_release_file https://www.cns11643.gov.tw/opendata/release.txt
-new_version=$(grep -oPm1 '(?<=版本：).*' release.txt)
+new_version=$(grep -oPm1 '(?<=版本：).*' $temp_release_file)
 
 echo
 if [[ "$current_version" == "$new_version" ]]; then
@@ -22,7 +22,7 @@ else
   wget -O Fonts_Kai.zip https://www.cns11643.gov.tw/opendata/Fonts_Kai.zip
   wget -O Fonts_Sung.zip https://www.cns11643.gov.tw/opendata/Fonts_Sung.zip
   for file in *zip; do
-    unzip $file '*.ttf'
+    unzip -o $file '*.ttf'
   done
   rm *zip
   echo -e "${YELLOW}${BOLD}UPDATED: 0-unstable-${new_version:0:4}-${new_version:4:2}-${new_version:6:2}${NC}"
